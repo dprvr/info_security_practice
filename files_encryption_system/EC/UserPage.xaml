@@ -1,0 +1,33 @@
+﻿<Page x:Class="EC.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EC"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserPage">
+    <Page.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontStyle="Italic" FontWeight="Heavy" FontSize="18" Text="{Binding UserName, Mode=OneTime}"/>
+
+        <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="False">
+            <Button DockPanel.Dock="Top" Content="Перейти в личную папку" Style="{StaticResource ResourceKey=ButtonsStyle}" Command="{Binding OpenUserDir, Mode=OneTime}"/>
+            <Button DockPanel.Dock="Bottom" Content="Выйти из аккаунта" Style="{StaticResource ResourceKey=ButtonsStyle}" Command="{Binding LogOff, Mode=OneTime}"/>
+        </DockPanel>
+    </Grid>
+</Page>

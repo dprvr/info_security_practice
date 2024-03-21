@@ -1,0 +1,29 @@
+﻿<Page x:Class="EC.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EC"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="500"
+      Title="HomePage" Background="Transparent">
+    <Page.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Page.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Label Style="{StaticResource LabelStyle}" Target="{Binding ElementName=LoginBox}" Content="Введите логин"/>
+            <TextBox x:Name="LoginBox" Style="{StaticResource InputBox}" Text="{Binding Login}"/>
+            <Label Style="{StaticResource LabelStyle}" Target="{Binding ElementName=PasswordBox}" Content="Введите пароль"/>
+            <PasswordBox x:Name="PasswordBox" Style="{StaticResource PasswordStyle}"/>
+            <TextBlock HorizontalAlignment="Center">
+            <Hyperlink Command="{Binding Register}">
+                <TextBlock Style="{StaticResource NavigateText}" Text="Еще не зарегистрированы? Зарегистрироваться" />
+            </Hyperlink>    
+            </TextBlock>
+                
+            <Button Style="{StaticResource ButtonsStyle}" Command="{Binding Enter}" CommandParameter="{Binding ElementName=PasswordBox}" Content="Войти"/>
+        </StackPanel>
+        
+    </Grid>
+</Page>

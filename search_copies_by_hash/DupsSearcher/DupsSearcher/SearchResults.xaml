@@ -1,0 +1,64 @@
+﻿<Window x:Class="DupsSearcher.SearchResults"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DupsSearcher"
+        mc:Ignorable="d"
+        Title="SearchResults" Height="500" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="Height">
+
+    <Window.Resources>
+        <Style x:Key ="copiesListStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CopiesVisible}" Value="false">
+                    <Setter Property="ListView.Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="unhandledStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UnhandledVisible}" Value="false">
+                    <Setter Property="ContentControl.Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="1" LastChildFill="False" Margin="0">
+            
+            <TextBlock Margin="10, 10, 10, 0" TextWrapping="Wrap" DockPanel.Dock="Top">
+                <Run Text="{Binding CopiesFoundMessage, Mode=OneTime}"/>
+            </TextBlock>
+
+            <ListView DockPanel.Dock="Top" Style="{StaticResource ResourceKey=copiesListStyle}" Margin="10, 0, 10, 10" ItemsSource="{Binding Path=Copies, Mode=OneTime}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name, Mode=OneTime}" Header="Имя файла"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FullName, Mode=OneTime}" Header="Путь к файлу"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Style="{StaticResource ResourceKey=unhandledStyle}" Margin="10, 10, 10, 0" TextWrapping="Wrap" DockPanel.Dock="Top" FontStyle="Oblique">
+            <Run Text="{Binding UnhandledFilesMessage, Mode=OneTime}"/>
+            </TextBlock>
+
+            <ListView DockPanel.Dock="Top" Style="{StaticResource ResourceKey=unhandledStyle}" Margin="10, 0, 10, 10" ItemsSource="{Binding Path=Unhandled, Mode=OneTime}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name, Mode=OneTime}" Header="Имя файла"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Error, Mode=OneTime}" Header="Ошибка"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Path, Mode=OneTime}" Header="Путь к файлу"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+
+    </Grid>
+</Window>
